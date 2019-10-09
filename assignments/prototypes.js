@@ -39,27 +39,35 @@
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 function GameObject(obj) {
-    this.createdAt = obj.createdAt; //created at
-    this.name = obj.name; //name
-    this.dimension = obj.dimension; //dimension
+    this.createdAt = obj.createdAt;
+    this.dimension = obj.dimension;
 }
 
 GameObject.prototype.destroy = function() {
-        return `${this.name} has been removed from the game!`;
-    } //required use of prototype
+    return /*(this.name) +*/ " has been removed from the game!";
+}
+
+//*****Character Stats*****//
 
 function CharacterStats(stats) {
     GameObject.call(this, stats);
     this.health = stats.health;
 }
 
+
+
 CharacterStats.prototype.takeDamage = function() {
-        if (this.health <= 15) {
-            return GameObject.prototype.destroy();
-        } else {
-            return `${this.name} took damage!!`
-        }
-    } //inheriting 'destroy'using prototype with an if/else statement to execute takeDamage
+    if (this.health <= 15) {
+        return (this.name) + GameObject.prototype.destroy();
+    } else {
+        return `${this.name} took damage!!`
+    }
+}
+
+
+
+//*****Humanoid*****//
+
 
 function Humanoid(player) {
     CharacterStats.call(this, player);
@@ -69,13 +77,16 @@ function Humanoid(player) {
     this.weapons = player.weapons;
     this.language = player.language;
 }
+
+// Humanoid.prototype = Object.create(GameObject.prototype);
+
 Humanoid.prototype.greet = function() {
     return `${this.name} offers a greeting in ${this.language}`
 }
 
 Humanoid.prototype.fight = CharacterStats.prototype.takeDamage;
 
-
+//*****Objects*****//
 
 const mage = new Humanoid({
     createdAt: new Date(),
@@ -100,7 +111,7 @@ const swordsman = new Humanoid({
         height: 2,
     },
     health: 15,
-    name: 'Sir Mustachio',
+    name: "Sir Mustachio",
     team: 'The Round Table',
     weapons: [
         'Giant Sword',
