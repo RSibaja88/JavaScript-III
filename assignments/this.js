@@ -12,29 +12,29 @@
 // Principle 1
 
 // code example for Window Binding
-console.log(this);
+// console.log(this);
 
-// Principle 2
+// // Principle 2
 
-// code example for Implicit Binding
-console.log(this.action);
+// // code example for Implicit Binding
+// console.log(this.action);
 // Principle 3
 
 // code example for New Binding
 //create a constructor function
-function freeFolk(northener) {
+function freeFolk(name) {
     this.phrase = 'You know nothing, ';
-    this.northener = northener;
+    this.name = name;
     this.speak = function() {
-        console.log(this.phrase + this.northener);
-        console.log(this);
+        console.log(this.phrase + this.name);
     };
 }
 
-const ygritte = new northener('Jon Snow');
-const jonSnow = new northerner('Ygritte');
+const ygritte = new freeFolk('Jon Snow');
+const jonSnow = new freeFolk('Ygritte');
 
-ygritte.speak();
+console.log(ygritte.speak());
+console.log(jonSnow.speak());
 
 // Principle 4
 
